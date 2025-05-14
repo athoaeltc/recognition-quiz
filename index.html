@@ -5,8 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Recognition Self-Reflection Quiz</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 40px; background: #fff; color: #330066; }
-    h1, h2 { color: #330066; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #330066; }
+    header { text-align: center; background: #fff; padding: 40px 20px 20px; border-bottom: 2px solid #330066; }
+    header img { max-height: 100px; }
+    header h1 { color: #330066; margin: 20px 0 0; font-size: 1.5em; letter-spacing: 1px; text-transform: uppercase; }
+    header .divider { width: 40px; height: 4px; background-color: #660099; margin: 10px auto 0; }
+    main { padding: 40px; }
+    h2 { color: #330066; }
     .question { margin-bottom: 20px; }
     .question label { display: block; margin: 5px 0; }
     .submit-btn { margin-top: 30px; background: #330066; color: white; padding: 10px 20px; border: none; cursor: pointer; font-size: 16px; }
@@ -14,15 +19,22 @@
   </style>
 </head>
 <body>
-  <h2>How are you doing with recognition?</h2>
-  <p>Rate yourself on each action below and click Submit. Your score will be calculated at the end to rate your recognition. <br>(i.e. if you perform all of these actions all of the time, you will have a score of 48.</p>
-  <p><b>1</b> = Rarely or never | <b>2</b> = Some of the time | <b>3</b> = Most of the time | <b>4</b> = All of the time</p><br>
+  <header>
+    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/2/28/Wimbledon_Logo.svg/1200px-Wimbledon_Logo.svg.png" alt="Wimbledon Logo">
+    <h1>Assess My Recognition Practices Questionnaire</h1>
+    <div class="divider"></div>
+  </header>
+  <main>
+    <h2>How are you doing with recognition?</h2>
+    <p>Rate yourself on each action below and click Submit. Your score will be calculated at the end to rate your recognition. <br>(i.e. if you perform all of these actions all of the time, you will have a score of 48.</p>
+    <p><b>1</b> = Rarely or never | <b>2</b> = Some of the time | <b>3</b> = Most of the time | <b>4</b> = All of the time</p><br>
 
-  <form id="quizForm">
-    <div class="questions"></div>
-    <button type="submit" class="submit-btn">Submit</button>
-  </form>
-  <div id="result" class="result"></div>
+    <form id="quizForm">
+      <div class="questions"></div>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+    <div id="result" class="result"></div>
+  </main>
 
   <script>
     const questions = [
