@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recognition Self-Reflection Quiz</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; background: #fff; color: #330066; }
+    h1, h2 { color: #330066; }
+    .question { margin-bottom: 20px; }
+    .question label { display: block; margin: 5px 0; }
+    .submit-btn { margin-top: 30px; background: #330066; color: white; padding: 10px 20px; border: none; cursor: pointer; font-size: 16px; }
+    .result { margin-top: 30px; padding: 20px; border: 2px solid #330066; background: #f5f0ff; display: none; }
+  </style>
+</head>
+<body>
+  <h2>How are you doing with recognition?</h2>
+  <p>Rate yourself on each action below and click Submit. Your score will be calculated at the end to rate your recognition. <br>(i.e. if you perform all of these actions all of the time, you will have a score of 48.</p>
+  <p><b>1</b> = Rarely or never | <b>2</b> = Some of the time | <b>3</b> = Most of the time | <b>4</b> = All of the time</p><br>
+
+  <form id="quizForm">
+    <div class="questions"></div>
+    <button type="submit" class="submit-btn">Submit</button>
+  </form>
+  <div id="result" class="result"></div>
+
+  <script>
+    const questions = [
+      "I show my team that I appreciate them on at least a weekly basis",
+      "My team understand what behaviours will be recognised",
+      "I utilise a variety of recognition practices",
+      "My team get a choice in how they are recognised",
+      "I model a culture of recognition by acknowledging the contributions of individuals and teams outside of my own team",
+      "I encourage colleagues to participate in team recognition activities and events",
+      "I highlight the goals and values of my team by clearly connecting them to my recognition practices",
+      "I make an effort to connect my recognition efforts to AELTC values, behaviours and priorities",
+      "I encourage my team to engage in peer to peer recognition practices",
+      "I recognise the small achievements as well as the large ones",
+      "I have regular 1:1 conversations with my team members",
+      "I provide regular constructive feedback to my team members"
+    ];
+
+    const scale = [
+      "Rarely or never",
+      "Some of the time",
+      "Most of the time",
+      "All of the time"
+    ];
+
+    const feedbackMessages = [
+      { min: 40, message: "You’re a colleague recognition pro! Keep up the excellent work." },
+      { min: 30, message: "You’re doing well with colleague recognition. You’ve got the basics down, and have a solid recognition foundation, but there is always room for improvement." },
+      { min: 20, message: "Though you aren’t failing, there is still room to do more to recognise your team and colleagues. You may be missing out on maximising engagement and connection, so now’s the time to commit to making some more intentional efforts around recognition." },
+      { min: 16, message: "There is lots of room for growth! Chances are that your recognition efforts aren’t hitting the mark with your team or aren’t happening often enough. Now’s the time to start making sure team members feel seen and appreciated." },
+      { min: 0, message: "Time for action. It’s time to show your team that you notice and appreciate their contributions and give them the recognition that they need and deserve." }
+    ];
+
+    const questionsContainer = document.querySelector(".questions");
+
+    questions.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.className = "question";
+      div.innerHTML = `<p><strong>${i + 1}. ${q}</strong></p>` +
+        scale.map((text, idx) =>
+          `<label><input type="radio" name="q${i}" value="${idx + 1}" required> ${text}</label>`
+        ).join("");
+      questionsContainer.appendChild(div);
+    });
+
+    document.getElementById("quizForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      let total = 0;
+      for (let i = 0; i < questions.length; i++) {
+        const val = parseInt(document.querySelector(`input[name=q${i}]:checked`).value);
+        total += val;
+      }
+      const feedback = feedbackMessages.find(f => total >= f.min).message;
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = `<h2>Your score: ${total}/48</h2><p>${feedback}</p>`;
+      resultDiv.style.display = "block";
+    });
+  </script>
+</body>
+</html>
